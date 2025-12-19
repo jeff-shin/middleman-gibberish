@@ -153,6 +153,7 @@ module ::Middleman
                   margin: auto;
                   color: #999;
                   text-align: center;
+                  padding-top: 80px;
                 }
 
                 .gibberish-instructions,
@@ -160,6 +161,12 @@ module ::Middleman
                 .gibberish-message
                 {
                   margin-bottom: 1em;
+                }
+
+                .gibberish-instructions {
+                  font-size: 24px;
+                  font-family: sans-serif
+                  color: #222;
                 }
 
                 .gibberish-password {
@@ -172,8 +179,6 @@ module ::Middleman
                 .gibberish-message {
                   margin: auto;
                   color: #222;
-                  font-size: 24px;
-                  font-family: sans-serif
                 }
               </style>
             </head>
@@ -185,7 +190,7 @@ module ::Middleman
               <div class='gibberish'>
 
                 <div class='gibberish-instructions'>
-                  enter password and press &lt;enter&gt;
+                  Enter the password and press enter.
                 </div>
 
                 <input id='gibberish-password' name='gibberish-password' type='password' class='gibberish-password'/>
