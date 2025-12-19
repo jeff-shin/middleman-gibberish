@@ -148,9 +148,9 @@ all three are included in this repo.  if your application has checked them
 into source/gibberish/javascripts *then they will be used*, otherwise the lib
 uses versions hosted on github's CDN here:
 
-- http://ahoward.github.io/middleman-gibberish/assets/jquery.js
-- http://ahoward.github.io/middleman-gibberish/assets/jquery.cookie.js
-- http://ahoward.github.io/middleman-gibberish/assets/gibberish.js
+- https://ahoward.github.io/middleman-gibberish/assets/jquery.js
+- https://ahoward.github.io/middleman-gibberish/assets/jquery.cookie.js
+- https://ahoward.github.io/middleman-gibberish/assets/gibberish.js
 
 if you decide to use local copies, make sure the names match *exactly*, that is
 to say, you must have *jquery.js* and not *jquery-1.2.3.4.js* in
