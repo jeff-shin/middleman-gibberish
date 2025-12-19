@@ -154,6 +154,7 @@ module ::Middleman
                   color: #999;
                   text-align: center;
                   padding-top: 80px;
+                  font-family: sans-serif;
                 }
 
                 .gibberish-instructions,
@@ -165,7 +166,7 @@ module ::Middleman
 
                 .gibberish-instructions {
                   font-size: 24px;
-                  font-family: sans-serif
+                  font-family: sans-serif;
                   color: #222;
                 }
 
