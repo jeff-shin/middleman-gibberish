@@ -147,6 +147,7 @@ module ::Middleman
         <<-__
           <html>
             <head>
+              <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
               <style>
                 .gibberish {
                   margin: auto;
@@ -163,11 +164,16 @@ module ::Middleman
 
                 .gibberish-password {
                   border: 1px solid #ccc;
+                  border-radius: 3px;
+                  font-size: 20px;
+                  padding: 8px 12px;
                 }
 
                 .gibberish-message {
                   margin: auto;
-                  color: #633;
+                  color: #222;
+                  font-size: 24px;
+                  font-family: sans-serif
                 }
               </style>
             </head>
