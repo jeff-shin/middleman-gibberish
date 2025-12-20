@@ -257,7 +257,34 @@ module ::Middleman
                 if(_password){
                   try{
                     var decrypted = GibberishAES.dec(encrypted, _password);
-                    jQuery('body').html(decrypted);
+                    
+                    // Parse the decrypted HTML to separate head and body content
+                    // Use DOMParser if available, otherwise fall back to regex/jQuery parsing
+                    var decryptedHead = '';
+                    var decryptedBody = '';
+                    
+                    // Try to extract head and body using regex (works for full HTML documents)
+                    var headMatch = decrypted.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+                    var bodyMatch = decrypted.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    
+                    if (headMatch && headMatch[1]) {
+                      decryptedHead = headMatch[1];
+                    }
+                    
+                    if (bodyMatch && bodyMatch[1]) {
+                      decryptedBody = bodyMatch[1];
+                    } else {
+                      // If no body tag found, assume entire content is body
+                      decryptedBody = decrypted;
+                    }
+                    
+                    // Append any new head content to existing head (preserving existing head)
+                    if (decryptedHead) {
+                      jQuery('head').append(decryptedHead);
+                    }
+                    
+                    // Replace only the body content
+                    jQuery('body').html(decryptedBody);
 
                     try{
                       jQuery.cookie(cookie, _password, options);
