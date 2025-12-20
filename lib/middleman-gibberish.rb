@@ -231,7 +231,6 @@ module ::Middleman
                 <input id='gibberish-password' name='gibberish-password' type='password' class='gibberish-password'/>
 
                 <div class='gibberish-message'>
-                  Incorrect password
                 </div>
 
               </div>
@@ -259,23 +258,43 @@ module ::Middleman
                     var decrypted = GibberishAES.dec(encrypted, _password);
                     
                     // Parse the decrypted HTML to separate head and body content
-                    // Use DOMParser if available, otherwise fall back to regex/jQuery parsing
                     var decryptedHead = '';
                     var decryptedBody = '';
                     
-                    // Try to extract head and body using regex (works for full HTML documents)
-                    var headMatch = decrypted.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-                    var bodyMatch = decrypted.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                    
-                    if (headMatch && headMatch[1]) {
-                      decryptedHead = headMatch[1];
+                    // Use DOMParser if available (modern browsers)
+                    if (typeof DOMParser !== 'undefined') {
+                      try {
+                        var parser = new DOMParser();
+                        var doc = parser.parseFromString(decrypted, 'text/html');
+                        if (doc.head) {
+                          decryptedHead = doc.head.innerHTML || '';
+                        }
+                        if (doc.body) {
+                          decryptedBody = doc.body.innerHTML || '';
+                        }
+                      } catch(parseError) {
+                        // Fall through to string manipulation fallback
+                      }
                     }
                     
-                    if (bodyMatch && bodyMatch[1]) {
-                      decryptedBody = bodyMatch[1];
-                    } else {
-                      // If no body tag found, assume entire content is body
-                      decryptedBody = decrypted;
+                    // Fallback: use string manipulation to extract head and body
+                    if (!decryptedBody) {
+                      var headStart = decrypted.indexOf('<head');
+                      var headEnd = decrypted.indexOf('</head>');
+                      var bodyStart = decrypted.indexOf('<body');
+                      var bodyEnd = decrypted.indexOf('</body>');
+                      
+                      if (headStart >= 0 && headEnd > headStart) {
+                        var headTagEnd = decrypted.indexOf('>', headStart) + 1;
+                        decryptedHead = decrypted.substring(headTagEnd, headEnd);
+                      }
+                      
+                      if (bodyStart >= 0 && bodyEnd > bodyStart) {
+                        var bodyTagEnd = decrypted.indexOf('>', bodyStart) + 1;
+                        decryptedBody = decrypted.substring(bodyTagEnd, bodyEnd);
+                      } else {
+                        decryptedBody = decrypted;
+                      }
                     }
                     
                     // Append any new head content to existing head (preserving existing head)
