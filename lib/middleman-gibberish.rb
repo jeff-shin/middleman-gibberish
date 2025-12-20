@@ -149,19 +149,42 @@ module ::Middleman
             <head>
               <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
               <style>
-                .gibberish {
-                  margin: auto;
-                  color: #999;
-                  text-align: center;
-                  padding-top: 80px;
-                  font-family: sans-serif;
+                * {
+                  box-sizing: border-box;
                 }
 
-                .gibberish-instructions,
-                .gibberish-password,
-                .gibberish-message
-                {
-                  margin-bottom: 1em;
+                body {
+                  margin: 0;
+                  background-color: #F8F4EF;
+                  min-height: 100vh;
+                }
+
+                .gibberish {
+                  margin: auto;
+                  text-align: left;;
+                  padding: 80px 20px;
+                  font-family: sans-serif;
+                  max-width: 320px;
+                  width: 100%;
+                }
+
+                .gibberish-instructions {
+                  font-family: sans-serif;
+                  font-weight: 400;
+                  width: 100%;
+                }
+
+                .gibberish-instructions h2 {
+                  font-size: 16px;
+                  color: #2F2F2F;
+                  font-weight: 400;
+                  margin-bottom: 4px;
+                }
+
+                .gibberish-instructions p {
+                  font-size: 14px;
+                  color: #B1ACA3;
+                  margin: 0 0 20px 0;
                 }
 
                 .gibberish-instructions {
@@ -171,15 +194,21 @@ module ::Middleman
                 }
 
                 .gibberish-password {
-                  border: 1px solid #ccc;
-                  border-radius: 3px;
-                  font-size: 20px;
-                  padding: 8px 12px;
+                  border: 1px solid #E2E1DF;
+                  border-radius: 8px;
+                  font-size: 16px;
+                  letter-spacing: 4px;
+                  padding: 12px;
+                  background: none;
+                  width: 100%;
                 }
 
                 .gibberish-message {
                   margin: auto;
                   color: #222;
+                  margin-top: 8px;
+                  font-size: 14px;
+                  color: #B1ACA3;
                 }
               </style>
             </head>
@@ -191,12 +220,18 @@ module ::Middleman
               <div class='gibberish'>
 
                 <div class='gibberish-instructions'>
-                  Enter the password and press enter.
+                  <h2>
+                    Enter the password
+                  </h2>
+                  <p>
+                    Then press enter
+                  </p>
                 </div>
 
                 <input id='gibberish-password' name='gibberish-password' type='password' class='gibberish-password'/>
 
                 <div class='gibberish-message'>
+                  Incorrect password
                 </div>
 
               </div>
@@ -222,7 +257,7 @@ module ::Middleman
                 if(_password){
                   try{
                     var decrypted = GibberishAES.dec(encrypted, _password);
-                    document.write(decrypted);
+                    jQuery('body').html(decrypted);
 
                     try{
                       jQuery.cookie(cookie, _password, options);
@@ -250,7 +285,7 @@ module ::Middleman
                 if(code==13){
                   var _password = password.val();
                   if(!decrypt(_password)){
-                    message.html("sorry, wrong password - try again.");
+                    message.html("Incorrect password");
                   }
                 } else {
                   message.html("");

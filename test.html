@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport"/>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background-color: #F8F4EF;
+        min-height: 100vh;
+      }
+
+      .gibberish {
+        margin: auto;
+        text-align: left;;
+        padding: 80px 20px;
+        font-family: sans-serif;
+        max-width: 320px;
+        width: 100%;
+      }
+
+      .gibberish-instructions {
+        font-family: sans-serif;
+        font-weight: 400;
+        width: 100%;
+      }
+
+      .gibberish-instructions h2 {
+        font-size: 16px;
+        color: #2F2F2F;
+        font-weight: 400;
+        margin-bottom: 4px;
+      }
+
+      .gibberish-instructions p {
+        font-size: 14px;
+        color: #B1ACA3;
+        margin: 0 0 20px 0;
+      }
+
+      .gibberish-instructions {
+        font-size: 24px;
+        font-family: sans-serif;
+        color: #222;
+      }
+
+      .gibberish-password {
+        border: 1px solid #E2E1DF;
+        border-radius: 8px;
+        font-size: 16px;
+        letter-spacing: 4px;
+        padding: 12px;
+        background: none;
+        width: 100%;
+      }
+
+      .gibberish-message {
+        margin: auto;
+        color: #222;
+        margin-top: 8px;
+        font-size: 14px;
+        color: #B1ACA3;
+      }
+    </style>
+  </head>
+
+  <body style='width:100%;'>
+    <br>
+    <br>
+    <br>
+    <div class='gibberish'>
+
+      <div class='gibberish-instructions'>
+        <h2>
+          Enter the password
+        </h2>
+        <p>
+          Then press enter
+        </p>
+      </div>
+
+      <input id='gibberish-password' name='gibberish-password' type='password' class='gibberish-password'/>
+
+      <div class='gibberish-message'>
+        Incorrect password
+      </div>
+
+    </div>
+  </body>
+</html>
